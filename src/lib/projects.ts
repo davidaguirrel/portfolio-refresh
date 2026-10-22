@@ -42,3 +42,8 @@ export async function getProjects(): Promise<Project[]> {
 
   return projects.sort((a, b) => b.year - a.year);
 }
+
+export async function findProject(slug: string): Promise<Project | undefined> {
+  const projects = await getProjects();
+  return projects.find((project) => project.slug === slug);
+}

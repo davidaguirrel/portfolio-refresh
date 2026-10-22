@@ -21,7 +21,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "David Aguirre",
+  title: {
+    default: "David Aguirre",
+    template: "%s · David Aguirre",
+  },
   description: "Frontend engineer building fast, accessible web apps.",
 };
 
