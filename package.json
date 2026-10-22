@@ -33,6 +33,7 @@
     "eslint-config-next": "16.4.2",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "prettier": "^3.9.10",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
@@ -41,5 +42,12 @@
   "packageManager": "pnpm@12.14.0",
   "engines": {
     "node": ">=24"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css,yml,yaml}": "prettier --write"
   }
 }
