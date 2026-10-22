@@ -1,18 +1,12 @@
 import { getProjects } from "@/lib/projects";
+import { Hero } from "@/components/home/hero";
 
 export default async function Home() {
   const projects = await getProjects();
 
   return (
     <>
-      <section className="py-24">
-        <h1 className="font-display text-4xl font-semibold tracking-tight">
-          Hi, I&apos;m David.
-        </h1>
-        <p className="mt-4 max-w-prose text-lg text-muted">
-          Frontend engineer. This page gets its real content in PR 5.
-        </p>
-      </section>
+      <Hero />
 
       <section id="projects" className="pb-24">
         <h2 className="font-display text-2xl font-semibold">Projects</h2>
