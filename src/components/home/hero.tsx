@@ -4,7 +4,7 @@ export function Hero() {
       <p className="font-mono text-sm text-accent">
         Senior Frontend Engineer · Málaga
       </p>
-      <h1 className="...">
+      <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
         Hi, I’m David. I build React and TypeScript apps that teams rely on.
       </h1>
       <p className="mt-6 max-w-prose text-lg text-muted">
