@@ -6,8 +6,6 @@ export type Milestone = {
 
 // Newest first
 export const milestones: Milestone[] = [
-  // Add your roles since 2020 here, for example:
-  // { year: 2023, title: "Senior Frontend Engineer", place: "Company name" },
   {
     year: 2025,
     title: "AWS Certified AI Practitioner",
