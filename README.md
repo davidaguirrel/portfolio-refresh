@@ -34,3 +34,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `pnpm typecheck`    | Checks types with the TypeScript compiler |
 | `pnpm format`       | Formats all files with Prettier           |
 | `pnpm format:check` | Checks formatting without changing files  |
+
+## Pre-commit hook
+
+`pnpm install` sets up a Git hook with [Husky](https://typicode.github.io/husky/). On every commit, [lint-staged](https://github.com/lint-staged/lint-staged) runs ESLint and Prettier on the staged files and fixes what it can, then `pnpm typecheck` checks the whole project. If anything fails, the commit stops.
