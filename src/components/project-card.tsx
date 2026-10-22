@@ -1,10 +1,18 @@
+import Link from "next/link";
 import type { Project } from "@/lib/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex flex-1 flex-col rounded-xl border border-border bg-surface p-5">
       <div className="flex items-baseline justify-between gap-4">
-        <h3 className="font-display text-lg font-semibold">{project.title}</h3>
+        <h3 className="font-display text-lg font-semibold">
+          <Link
+            href={`/projects/${project.slug}`}
+            className="transition-colors hover:text-accent"
+          >
+            {project.title}
+          </Link>
+        </h3>
         <span className="font-mono text-xs text-muted">{project.year}</span>
       </div>
       <p className="mt-2 text-sm text-muted">{project.summary}</p>
