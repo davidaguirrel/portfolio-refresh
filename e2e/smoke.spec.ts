@@ -1,6 +1,13 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+import { readdirSync } from "node:fs";
+
+// Every project page, read from the content folder so new ones are scanned too
+const projectPaths = readdirSync("src/content/projects")
+  .filter((file) => file.endsWith(".mdx"))
+  .map((file) => `/projects/${file.replace(/\.mdx$/, "")}`);
+
 test("home page shows the intro and projects", async ({ page }) => {
   await page.goto("/");
 
@@ -36,7 +43,7 @@ test("the theme toggle switches to dark mode", async ({ page }) => {
   await expect(page.locator("html")).toHaveClass(/dark/);
 });
 
-for (const path of ["/", "/projects/my-reads"]) {
+for (const path of ["/", ...projectPaths]) {
   for (const colorScheme of ["light", "dark"] as const) {
     test(`${path} has no accessibility issues in ${colorScheme} mode`, async ({
       page,

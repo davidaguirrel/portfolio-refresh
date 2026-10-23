@@ -34,6 +34,23 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `pnpm typecheck`    | Checks types with the TypeScript compiler |
 | `pnpm format`       | Formats all files with Prettier           |
 | `pnpm format:check` | Checks formatting without changing files  |
+| `pnpm test`         | Runs the component tests with Vitest      |
+| `pnpm test:watch`   | Reruns the component tests on every save  |
+| `pnpm test:e2e`     | Runs the browser tests with Playwright    |
+
+## Tests
+
+Component tests live next to the component they test (`project-card.test.tsx`) and run in a simulated browser with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com).
+
+Browser tests live in `e2e/` and run with [Playwright](https://playwright.dev) against the production build, on a desktop and a mobile screen. They also scan pages with [axe](https://github.com/dequelabs/axe-core) for accessibility issues in light and dark mode. Before the first run:
+
+```bash
+pnpm exec playwright install chromium   # first time only
+pnpm build
+pnpm test:e2e
+```
+
+CI runs both on every pull request.
 
 ## Pre-commit hook
 
