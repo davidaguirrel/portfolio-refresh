@@ -9,10 +9,7 @@ export const contentType = "image/png";
 
 export default function Image() {
   return new ImageResponse(
-    <OgCard
-      title="I build React and TypeScript apps that teams rely on."
-      subtitle={site.description}
-    />,
+    <OgCard title="Hi, I'm David." subtitle={site.description} />,
     size,
   );
 }
