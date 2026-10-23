@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { site } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,11 +22,20 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "David Aguirre",
-    template: "%s · David Aguirre",
+    default: `${site.name} · ${site.jobTitle}`,
+    template: `%s · ${site.name}`,
   },
-  description: "Frontend engineer building fast, accessible web apps.",
+  description: site.description,
+  openGraph: {
+    siteName: site.name,
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 // Runs before the page paints, so there's no flash of the wrong theme
