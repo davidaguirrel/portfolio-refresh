@@ -1,7 +1,6 @@
+import { readdirSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-
-import { readdirSync } from "node:fs";
 
 // Every project page, read from the content folder so new ones are scanned too
 const projectPaths = readdirSync("src/content/projects")
