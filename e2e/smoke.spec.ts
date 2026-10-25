@@ -27,6 +27,24 @@ test("a project card opens its page", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("My Reads");
 });
 
+test("tapping anywhere on a project card opens its page", async ({ page }) => {
+  await page.goto("/");
+
+  // Click the middle of the card, away from the title link itself
+  await page.locator("article", { hasText: "This Portfolio" }).click();
+
+  await expect(page).toHaveURL("/projects/portfolio-site");
+});
+
+test("a project card's code link stays clickable", async ({ page }) => {
+  await page.goto("/");
+
+  // A trial click fails if the card's stretched link covers the code link
+  await page
+    .getByRole("link", { name: /code for this portfolio/i })
+    .click({ trial: true });
+});
+
 test("an unknown project shows the not found page", async ({ page }) => {
   await page.goto("/projects/does-not-exist");
 
