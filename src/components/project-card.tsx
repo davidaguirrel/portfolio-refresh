@@ -3,9 +3,9 @@ import type { Project } from "@/lib/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="flex flex-1 flex-col rounded-xl border border-border bg-surface p-5">
+    <article className="flex flex-1 flex-col rounded-2xl border border-border bg-surface p-6 transition hover:border-accent/60 hover:shadow-xl hover:shadow-brand-purple/10 motion-safe:hover:-translate-y-1">
       <div className="flex items-baseline justify-between gap-4">
-        <h3 className="font-display text-lg font-semibold">
+        <h3 className="font-display text-xl font-semibold">
           <Link
             href={`/projects/${project.slug}`}
             className="transition-colors hover:text-accent"

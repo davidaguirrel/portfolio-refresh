@@ -41,11 +41,11 @@ async function Project({
   const { default: Content } = await import(`@/content/projects/${slug}.mdx`);
 
   return (
-    <article className="py-16">
+    <article className="max-w-3xl py-16">
       <Link href="/#projects" className="text-sm text-muted hover:text-fg">
         ← All projects
       </Link>
-      <h1 className="mt-6 font-display text-4xl font-semibold tracking-tight">
+      <h1 className="mt-6 w-fit text-gradient font-display text-5xl font-bold tracking-tight sm:text-6xl">
         {project.title}
       </h1>
       <p className="mt-3 text-lg text-muted">{project.summary}</p>
@@ -57,7 +57,7 @@ async function Project({
         {project.links.code && (
           <a
             href={project.links.code}
-            className="rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-surface"
+            className="rounded-full border border-border px-6 py-2.5 font-semibold transition-colors hover:border-accent hover:text-accent"
           >
             View code
           </a>
@@ -65,7 +65,7 @@ async function Project({
         {project.links.demo && (
           <a
             href={project.links.demo}
-            className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+            className="rounded-full bg-linear-to-r from-violet-600 to-cyan-700 px-6 py-2.5 font-semibold text-white shadow-lg shadow-violet-600/25 transition hover:brightness-110"
           >
             Live demo
           </a>
