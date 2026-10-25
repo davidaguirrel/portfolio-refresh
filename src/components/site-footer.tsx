@@ -10,7 +10,7 @@ const links = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4 px-6 py-6 text-sm text-muted">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-6 text-sm text-muted">
         <p>David Aguirre</p>
         <ul className="flex gap-4">
           {links.map((link) => (

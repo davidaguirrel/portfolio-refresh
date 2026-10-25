@@ -66,7 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader />
-        <main id="content" className="mx-auto w-full max-w-3xl flex-1 px-6">
+        <main id="content" className="mx-auto w-full max-w-5xl flex-1 px-6">
           {children}
         </main>
         <SiteFooter />
