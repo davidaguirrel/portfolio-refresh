@@ -1,0 +1,29 @@
+---
+title: This Portfolio
+summary: The site you're on, rebuilt from scratch with Next.js 16, typed MDX content and tests that run on every pull request.
+year: 2026
+stack: [Next.js, React, TypeScript, Tailwind CSS, MDX]
+links:
+  code: https://github.com/davidaguirrel/portfolio-refresh
+---
+
+I rebuilt my personal site from scratch in ten small pull requests, each one
+reviewed and checked in CI before it merged.
+
+## What's inside
+
+- Pages are prerendered with React Server Components and ship very little
+  JavaScript.
+- Each project is an MDX file, and Zod checks its frontmatter, so bad data
+  fails the build instead of reaching the site.
+- Light and dark themes are built from Tailwind CSS design tokens.
+- Every page has metadata, a generated Open Graph image and structured data.
+
+## How it's checked
+
+- GitHub Actions runs lint, formatting, typecheck, tests and the build on
+  every pull request.
+- Vitest and Testing Library cover the components, and Playwright with axe
+  scans every page for accessibility issues in both themes.
+- Lighthouse CI fails the pull request if performance, accessibility or SEO
+  scores drop.

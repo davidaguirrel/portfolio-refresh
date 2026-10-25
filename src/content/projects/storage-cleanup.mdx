@@ -1,0 +1,24 @@
+---
+title: S3 Storage Cleanup
+summary: Added lifecycle and deletion policies to a shared CloudFormation template, cutting stored deployment artifacts by over 98%.
+year: 2025
+company: Caterpillar
+stack: [AWS, CloudFormation, S3]
+links: {}
+---
+
+A security report flagged that our deployment artifacts were kept in S3
+forever. I fixed it in the shared CloudFormation template that creates those
+buckets.
+
+## What I did
+
+- Added S3 lifecycle and deletion policies, so old artifacts expire instead of
+  piling up.
+- Used GitHub Copilot to work through infrastructure-as-code I hadn't written
+  before.
+
+## Result
+
+Retained storage dropped from over 30 GB to a few hundred MB, and the
+security finding was closed.
