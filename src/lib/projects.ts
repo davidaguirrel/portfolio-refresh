@@ -6,9 +6,10 @@ const projectSchema = z.object({
   title: z.string().min(1),
   summary: z.string().max(160),
   year: z.number().int().min(2010),
+  company: z.string().optional(),
   stack: z.array(z.string()).min(1),
   links: z.object({
-    code: z.url(),
+    code: z.url().optional(),
     demo: z.url().optional(),
   }),
   archived: z.boolean().default(false),

@@ -13,7 +13,10 @@ export function ProjectCard({ project }: { project: Project }) {
             {project.title}
           </Link>
         </h3>
-        <span className="font-mono text-xs text-muted">{project.year}</span>
+        <span className="shrink-0 font-mono text-xs text-muted">
+          {project.company && `${project.company} · `}
+          {project.year}
+        </span>
       </div>
       <p className="mt-2 text-sm text-muted">{project.summary}</p>
       <ul aria-label="Tech stack" className="mt-4 flex flex-wrap gap-2">
@@ -27,9 +30,11 @@ export function ProjectCard({ project }: { project: Project }) {
         ))}
       </ul>
       <div className="mt-auto flex gap-4 pt-5 text-sm font-medium">
-        <a href={project.links.code} className="text-accent hover:underline">
-          Code<span className="sr-only"> for {project.title}</span>
-        </a>
+        {project.links.code && (
+          <a href={project.links.code} className="text-accent hover:underline">
+            Code<span className="sr-only"> for {project.title}</span>
+          </a>
+        )}
         {project.links.demo && (
           <a href={project.links.demo} className="text-accent hover:underline">
             Live demo<span className="sr-only"> of {project.title}</span>

@@ -50,15 +50,18 @@ async function Project({
       </h1>
       <p className="mt-3 text-lg text-muted">{project.summary}</p>
       <p className="mt-6 font-mono text-sm text-muted">
+        {project.company && `${project.company} · `}
         {project.year} · {project.stack.join(", ")}
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a
-          href={project.links.code}
-          className="rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-surface"
-        >
-          View code
-        </a>
+        {project.links.code && (
+          <a
+            href={project.links.code}
+            className="rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-surface"
+          >
+            View code
+          </a>
+        )}
         {project.links.demo && (
           <a
             href={project.links.demo}
