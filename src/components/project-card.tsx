@@ -3,7 +3,7 @@ import type { Project } from "@/lib/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="flex flex-1 flex-col rounded-2xl border border-border bg-surface p-6 transition hover:border-accent/60 hover:shadow-xl hover:shadow-brand-purple/10 motion-safe:hover:-translate-y-1">
+    <article className="flex flex-1 flex-col rounded-2xl border border-border bg-surface p-6 shadow-card transition hover:border-accent/60 motion-safe:hover:-translate-y-1">
       <div className="flex items-baseline justify-between gap-4">
         <h3 className="font-display text-xl font-semibold">
           <Link

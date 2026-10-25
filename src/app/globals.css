@@ -32,6 +32,7 @@
   /* The original site's purple-to-cyan gradient, for decoration */
   --color-brand-purple: #945dd6;
   --color-brand-cyan: #13adc7;
+  --shadow-card: 3px 3px 20px rgb(80 78 78 / 0.5);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
