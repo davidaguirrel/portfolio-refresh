@@ -1,6 +1,9 @@
+import { HeroAnimation } from "./hero-animation";
+
 export function Hero() {
   return (
-    <section className="py-20 sm:py-32">
+    <section className="relative isolate py-20 sm:py-32">
+      <HeroAnimation className="absolute top-1/2 -right-32 -z-10 hidden w-[36rem] -translate-y-1/2 text-fg lg:block" />
       <p className="font-mono text-sm text-accent">
         Senior Frontend Engineer · Málaga
       </p>
