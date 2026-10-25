@@ -3,11 +3,11 @@ import { site } from "@/lib/site";
 // Social preview images can't use Tailwind or CSS variables, so these are the
 // dark theme colors written out as hex
 const colors = {
-  bg: "#0b0d12",
+  bg: "#0f1624",
   fg: "#edeef2",
   muted: "#9b9ea5",
-  border: "#2b2e33",
-  accent: "#809eff",
+  border: "#2a3550",
+  accent: "#13adc7",
 };
 
 export const ogSize = { width: 1200, height: 630 };
