@@ -25,18 +25,19 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Script              | What it does                              |
-| ------------------- | ----------------------------------------- |
-| `pnpm dev`          | Starts the dev server with hot reload     |
-| `pnpm build`        | Creates a production build                |
-| `pnpm start`        | Serves the production build locally       |
-| `pnpm lint`         | Checks the code with ESLint               |
-| `pnpm typecheck`    | Checks types with the TypeScript compiler |
-| `pnpm format`       | Formats all files with Prettier           |
-| `pnpm format:check` | Checks formatting without changing files  |
-| `pnpm test`         | Runs the component tests with Vitest      |
-| `pnpm test:watch`   | Reruns the component tests on every save  |
-| `pnpm test:e2e`     | Runs the browser tests with Playwright    |
+| Script              | What it does                                |
+| ------------------- | ------------------------------------------- |
+| `pnpm dev`          | Starts the dev server with hot reload       |
+| `pnpm build`        | Creates a production build                  |
+| `pnpm start`        | Serves the production build locally         |
+| `pnpm lint`         | Checks the code with ESLint                 |
+| `pnpm typecheck`    | Checks types with the TypeScript compiler   |
+| `pnpm format`       | Formats all files with Prettier             |
+| `pnpm format:check` | Checks formatting without changing files    |
+| `pnpm test`         | Runs the component tests with Vitest        |
+| `pnpm test:watch`   | Reruns the component tests on every save    |
+| `pnpm test:e2e`     | Runs the browser tests with Playwright      |
+| `pnpm lighthouse`   | Audits the production build with Lighthouse |
 
 ## Tests
 
@@ -51,6 +52,10 @@ pnpm test:e2e
 ```
 
 CI runs both on every pull request.
+
+## Lighthouse
+
+`pnpm lighthouse` runs [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) three times against the home page and a project page, using the last `pnpm build`. It fails if a score drops below the budgets in `lighthouserc.json`: 90 for performance, 100 for accessibility, 95 for best practices and SEO. CI runs it on every pull request and saves the HTML reports as a downloadable artifact.
 
 ## Pre-commit hook
 
