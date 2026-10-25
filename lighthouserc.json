@@ -5,7 +5,7 @@
       "startServerReadyPattern": "Ready",
       "url": [
         "http://localhost:3200/",
-        "http://localhost:3200/projects/my-reads"
+        "http://localhost:3200/projects/unified-view"
       ],
       "numberOfRuns": 3
     },
