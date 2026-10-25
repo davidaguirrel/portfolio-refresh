@@ -1,4 +1,5 @@
 import { ProjectCard } from "@/components/project-card";
+import { SectionHeading } from "@/components/section-heading";
 import { getProjects } from "@/lib/projects";
 
 export async function Projects() {
@@ -10,11 +11,9 @@ export async function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="border-t border-border py-16"
+      className="py-16 sm:py-24"
     >
-      <h2 id="projects-heading" className="font-display text-2xl font-semibold">
-        Projects
-      </h2>
+      <SectionHeading id="projects-heading">Projects</SectionHeading>
       <p className="mt-2 text-muted">
         Recent work from my day job and this site’s rebuild.
       </p>
