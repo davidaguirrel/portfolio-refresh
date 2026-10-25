@@ -56,4 +56,14 @@ describe("ProjectCard", () => {
 
     expect(screen.queryByRole("link", { name: /Live demo/ })).toBeNull();
   });
+  it("shows the company and hides the code link for work projects", () => {
+    render(
+      <ProjectCard
+        project={{ ...project, company: "Caterpillar", links: {} }}
+      />,
+    );
+
+    expect(screen.getByText(/Caterpillar · 2018/)).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /code/i })).toBeNull();
+  });
 });
