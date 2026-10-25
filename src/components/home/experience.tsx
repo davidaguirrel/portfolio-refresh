@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/section-heading";
 import { credentials, roles } from "@/content/experience";
 
 export function Experience() {
@@ -5,14 +6,9 @@ export function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="border-t border-border py-16"
+      className="py-16 sm:py-24"
     >
-      <h2
-        id="experience-heading"
-        className="font-display text-2xl font-semibold"
-      >
-        Experience
-      </h2>
+      <SectionHeading id="experience-heading">Experience</SectionHeading>
       <ol className="mt-8 border-l border-border">
         {roles.map((role) => (
           <li
@@ -21,7 +17,7 @@ export function Experience() {
           >
             <span
               aria-hidden="true"
-              className="absolute top-1.5 -left-1.5 size-3 rounded-full border-2 border-bg bg-accent"
+              className="absolute top-1.5 -left-1.5 size-3 rounded-full border-2 border-bg bg-linear-to-br from-brand-purple to-brand-cyan"
             />
             <p className="font-mono text-xs text-muted">{role.year}</p>
             <h3 className="font-medium">{role.title}</h3>
