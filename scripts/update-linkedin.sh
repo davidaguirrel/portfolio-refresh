@@ -17,7 +17,8 @@ text=$(uv run --with pypdf python -c \
   echo 'export const linkedinProfile = `'
   # Drop page footers, decode &amp;, and neutralise characters that would break the template string
   printf '%s\n' "$text" |
-    sed -e '/Page [0-9]* of [0-9]*/d' -e 's/&amp;/\&/g' -e "s/\`/'/g" -e 's/\${/$ {/g'
+        sed -e '/Page [0-9]* of [0-9]*/d' -e 's/&amp;/\&/g' -e "s/\`/'/g" -e 's/\${/$ {/g' \
+      -e '/^Summary$/,/^Experience$/{/^Experience$/!d;}'
   echo '`;'
 } >"$out"
 
