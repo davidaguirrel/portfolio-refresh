@@ -1,5 +1,6 @@
-// David's LinkedIn profile, exported as PDF and converted to text once.
-// To update it, re-export the PDF, run the conversion again and paste here.
+// David's LinkedIn profile, generated from the LinkedIn PDF export.
+// Don't edit by hand: fix LinkedIn, export the PDF again, then run
+// scripts/update-linkedin.sh path/to/linkedin.pdf
 export const linkedinProfile = `
    
 Contact
@@ -56,18 +57,18 @@ path toward technical leadership.Happy to talk front-end architecture,
 AI-assisted development or new opportunities.
 Experience
 Caterpillar Inc.
-4 years 10 months
-Software Engineer
-January 2022 - Present (4 years 10 months)
-Chicago, Illinois, United States
+4 years 9 months
 Senior Software Engineer
 April 2025 - September 2026 (1 year 6 months)
 United States
+Software Engineer
+January 2022 - April 2025 (3 years 4 months)
+Chicago, Illinois, United States
 Interfirst
 Frontend Developer
 July 2020 - January 2022 (1 year 7 months)
 Chicago, Illinois, United States
-Reporting directly to the CTO, I am contributing to the transformation of the
+Reporting directly to the CTO, I contributed to the transformation of the
 mortgage buying experience by bringing best-in-class technology and building
 a delightful web application in a startup-like environment as part of a remote-
 based team.
@@ -75,8 +76,8 @@ based team.
 GraphCMS to the new one.
 - Migrated the company's website from GraphCMS to HubSpot to meet
 Marketing team needs.
-- Currently building Zero Mortgage website using HubSpot, HTML, CSS and
-their fields and modules system.
+- Built Zero Mortgage website using HubSpot, HTML, CSS and their fields and
+modules system.
 AT&T Services, Inc.
 7 years 8 months
 Senior VoIP Engineer | Technology & Operations
