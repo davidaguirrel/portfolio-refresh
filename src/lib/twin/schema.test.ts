@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { chatRequestSchema, MAX_MESSAGES, MAX_USER_CHARS } from "./schema";
+import { MAX_MESSAGES, MAX_USER_CHARS } from "./message-limits";
+import { chatRequestSchema } from "./schema";
 
 const user = (text: string, id = "u1") => ({
   id,

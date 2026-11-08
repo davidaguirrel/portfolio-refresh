@@ -1,8 +1,9 @@
 import { z } from "zod";
-
-export const MAX_MESSAGES = 20;
-export const MAX_USER_CHARS = 500;
-export const MAX_ASSISTANT_CHARS = 4_000;
+import {
+  MAX_ASSISTANT_CHARS,
+  MAX_MESSAGES,
+  MAX_USER_CHARS,
+} from "./message-limits";
 
 // useChat sends tool and "step-start" parts too. We keep only the text,
 // so the model never sees anything the browser made up.
