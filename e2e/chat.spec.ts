@@ -96,6 +96,24 @@ test("Escape closes the chat and keeps the conversation", async ({ page }) => {
   await expect(page.getByText("Hello there!")).toBeVisible();
 });
 
+test("New chat clears the conversation", async ({ page }) => {
+  await mockChat(page, "Hello there!");
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Ask my AI twin" }).click();
+  await page.getByLabel("Your message").fill("Hi");
+  await page.getByLabel("Your message").press("Enter");
+  await expect(page.getByText("Hello there!")).toBeVisible();
+
+  await page.getByRole("button", { name: "New chat" }).click();
+
+  await expect(page.getByText("Hello there!")).toBeHidden();
+  await expect(
+    page.getByRole("button", { name: "Tell me about your background" }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Your message")).toBeFocused();
+});
+
 for (const colorScheme of ["light", "dark"] as const) {
   test(`the open chat has no accessibility issues in ${colorScheme} mode`, async ({
     page,

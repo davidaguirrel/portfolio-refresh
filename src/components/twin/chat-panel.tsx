@@ -24,8 +24,15 @@ type ChatPanelProps = {
 
 export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
   // useChat keeps the messages and POSTs them to /api/chat by default
-  const { messages, sendMessage, setMessages, status, error, clearError } =
-    useChat();
+  const {
+    messages,
+    sendMessage,
+    setMessages,
+    status,
+    error,
+    clearError,
+    stop,
+  } = useChat();
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
@@ -50,6 +57,8 @@ export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
   }
 
   function startOver() {
+    // Stop an answer that's still arriving, so it can't land in the new chat
+    if (busy) void stop();
     setMessages([]);
     clearError();
     inputRef.current?.focus();
@@ -72,14 +81,25 @@ export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
             Answers about my career. It can make mistakes.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close chat"
-          className="rounded-md p-1 text-muted transition-colors hover:text-fg"
-        >
-          ✕
-        </button>
+        <div className="flex shrink-0 items-center gap-1">
+          {messages.length > 0 && (
+            <button
+              type="button"
+              onClick={startOver}
+              className="rounded-md px-2 py-1 text-sm text-muted transition-colors hover:text-fg"
+            >
+              New chat
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close chat"
+            className="rounded-md p-1 text-muted transition-colors hover:text-fg"
+          >
+            ✕
+          </button>
+        </div>
       </header>
 
       <div role="log" className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
