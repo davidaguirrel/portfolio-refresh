@@ -3,6 +3,14 @@ import { simulateReadableStream } from "ai";
 import { MockLanguageModelV4 } from "ai/test";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { POST } from "./route";
+import { checkBotId } from "botid/server";
+import { checkChatLimits } from "@/lib/twin/limits";
+
+vi.mock("botid/server", () => ({ checkBotId: vi.fn() }));
+vi.mock("@/lib/twin/limits", () => ({
+  checkChatLimits: vi.fn(),
+  canNotify: vi.fn(),
+}));
 
 vi.mock("server-only", () => ({}));
 
@@ -39,9 +47,14 @@ function fakeModel(reply: string) {
   });
 }
 
-function chatRequest(body: unknown) {
-  return new Request("http://localhost/api/chat", {
+function chatRequest(body: unknown, origin = "https://davidaguirre.tech") {
+  return new Request("https://davidaguirre.tech/api/chat", {
     method: "POST",
+    headers: {
+      host: "davidaguirre.tech",
+      origin,
+      "x-real-ip": "203.0.113.7",
+    },
     body: typeof body === "string" ? body : JSON.stringify(body),
   });
 }
@@ -57,6 +70,8 @@ describe("POST /api/chat", () => {
     mock = fakeModel("Hey! I'm the AI digital twin of David Aguirre López.");
     model.current = mock;
     vi.stubEnv("TWIN_CHAT_ENABLED", "true");
+    vi.mocked(checkBotId).mockResolvedValue({ isBot: false } as never);
+    vi.mocked(checkChatLimits).mockResolvedValue({ ok: true });
   });
 
   afterEach(() => {
@@ -111,6 +126,45 @@ describe("POST /api/chat", () => {
       }),
     );
     expect(response.status).toBe(400);
+    expect(mock.doStreamCalls).toHaveLength(0);
+  });
+
+  it("rejects requests from other websites", async () => {
+    const response = await POST(chatRequest(hello, "https://evil.example"));
+    expect(response.status).toBe(403);
+    expect(mock.doStreamCalls).toHaveLength(0);
+  });
+
+  it("rejects bots", async () => {
+    vi.mocked(checkBotId).mockResolvedValue({ isBot: true } as never);
+    const response = await POST(chatRequest(hello));
+    expect(response.status).toBe(403);
+    expect(mock.doStreamCalls).toHaveLength(0);
+  });
+
+  it("checks the limits for the visitor's IP", async () => {
+    await (await POST(chatRequest(hello))).text();
+    expect(checkChatLimits).toHaveBeenCalledWith("203.0.113.7");
+  });
+
+  it("answers 429 when a visitor or the site hits a limit", async () => {
+    vi.mocked(checkChatLimits).mockResolvedValue({
+      ok: false,
+      reason: "visitor-limit",
+    });
+    const response = await POST(chatRequest(hello));
+    expect(response.status).toBe(429);
+    expect(await response.json()).toMatchObject({ reason: "visitor-limit" });
+    expect(mock.doStreamCalls).toHaveLength(0);
+  });
+
+  it("answers 503 when the kill switch is off", async () => {
+    vi.mocked(checkChatLimits).mockResolvedValue({
+      ok: false,
+      reason: "switched-off",
+    });
+    const response = await POST(chatRequest(hello));
+    expect(response.status).toBe(503);
     expect(mock.doStreamCalls).toHaveLength(0);
   });
 });
