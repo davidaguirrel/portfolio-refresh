@@ -63,7 +63,7 @@ export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
       onKeyDown={(event) => {
         if (event.key === "Escape") onClose();
       }}
-      className="flex h-[min(34rem,calc(100dvh-7rem))] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card sm:w-96"
+      className="fixed inset-0 flex flex-col overflow-hidden bg-surface sm:static sm:h-[min(34rem,calc(100dvh-7rem))] sm:w-96 sm:rounded-2xl sm:border sm:border-border sm:shadow-card"
     >
       <header className="flex items-start justify-between gap-4 border-b border-border px-4 py-3">
         <div>
@@ -182,7 +182,7 @@ export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
           disabled={full}
           placeholder="Ask about my experience…"
           aria-label="Your message"
-          className="min-w-0 flex-1 rounded-full border border-border bg-bg px-4 py-2 text-sm placeholder:text-muted focus:border-accent focus:outline-none"
+          className="min-w-0 flex-1 rounded-full border border-border bg-bg px-4 py-2 text-base placeholder:text-muted focus:border-accent focus:outline-none sm:text-sm"
         />
         <button
           type="submit"
