@@ -1,8 +1,11 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { twinTools } from "./tools";
+import { canNotify } from "./limits";
+import { createTwinTools } from "./tools";
 
 vi.mock("server-only", () => ({}));
+vi.mock("./limits", () => ({ canNotify: vi.fn() }));
+const twinTools = createTwinTools("203.0.113.7");
 
 const options = { toolCallId: "call-1", messages: [] } as never;
 
@@ -13,6 +16,7 @@ describe("twinTools", () => {
     vi.stubGlobal("fetch", fetchMock.mockResolvedValue(new Response("{}")));
     vi.stubEnv("PUSHOVER_USER", "user-key");
     vi.stubEnv("PUSHOVER_TOKEN", "app-token");
+    vi.mocked(canNotify).mockResolvedValue(true);
   });
 
   afterEach(() => {
@@ -80,5 +84,17 @@ describe("twinTools", () => {
       400,
       "bad token",
     );
+  });
+  it("stops notifying once a visitor used up their daily allowance", async () => {
+    vi.mocked(canNotify).mockResolvedValue(false);
+
+    await expect(
+      twinTools.record_unknown_question.execute?.(
+        { question: "Anything" },
+        options,
+      ),
+    ).resolves.toBe("OK");
+    expect(canNotify).toHaveBeenCalledWith("203.0.113.7");
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });
