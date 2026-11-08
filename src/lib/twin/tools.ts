@@ -13,7 +13,7 @@ async function push(message: string) {
   }
 
   try {
-    await fetch("https://api.pushover.net/1/messages.json", {
+    const response = await fetch("https://api.pushover.net/1/messages.json", {
       method: "POST",
       body: new URLSearchParams({
         user,
@@ -21,6 +21,13 @@ async function push(message: string) {
         message: message.slice(0, 1024),
       }),
     });
+    if (!response.ok) {
+      console.error(
+        "Pushover rejected the message:",
+        response.status,
+        await response.text(),
+      );
+    }
   } catch (error) {
     console.error("Pushover failed:", error);
   }

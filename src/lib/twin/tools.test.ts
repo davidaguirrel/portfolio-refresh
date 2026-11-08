@@ -65,4 +65,20 @@ describe("twinTools", () => {
       ),
     ).resolves.toBe("OK");
   });
+  it("logs when Pushover rejects the message", async () => {
+    fetchMock.mockResolvedValue(new Response("bad token", { status: 400 }));
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await expect(
+      twinTools.record_unknown_question.execute?.(
+        { question: "Anything" },
+        options,
+      ),
+    ).resolves.toBe("OK");
+    expect(error).toHaveBeenCalledWith(
+      "Pushover rejected the message:",
+      400,
+      "bad token",
+    );
+  });
 });
