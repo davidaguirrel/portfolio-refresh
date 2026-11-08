@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 // The chat code (AI SDK and Markdown) only downloads after the first click,
 // so it never slows down the page for visitors who don't open the chat
 const ChatPanel = dynamic(
-  () => import("../../lib/twin/chat-panel").then((module) => module.ChatPanel),
+  () => import("./chat-panel").then((module) => module.ChatPanel),
   { ssr: false },
 );
 
