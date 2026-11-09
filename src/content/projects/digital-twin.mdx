@@ -28,9 +28,11 @@ domain.
 
 - A Next.js route handler on Vercel runs the agent with the Vercel AI SDK, which
   streams the answer and handles the tool calls. The model is Claude Haiku.
-- The prompt is built from my LinkedIn profile and a summary, so
-  it stays on career topics and records any question it can't answer instead
-  of making something up.
+- The prompt is built from my LinkedIn profile, a summary and the project
+  pages on this site, so it stays on career topics and records any question it
+  can't answer instead of making something up. A small script turns the
+  project pages into the twin's knowledge, and a test fails if I forget to
+  run it.
 - The chat window is a React component that loads only when you open it, so
   it adds nothing to the page load. On phones it opens full screen.
 
