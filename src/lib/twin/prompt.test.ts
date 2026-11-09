@@ -13,6 +13,14 @@ describe("twinSystemPrompt", () => {
     expect(twinSystemPrompt).toContain("Caterpillar");
   });
 
+  it("includes every portfolio project", () => {
+    expect(twinSystemPrompt).toContain("# His portfolio projects");
+    expect(twinSystemPrompt).toContain("Ed Donner");
+    expect(twinSystemPrompt).toContain(
+      "https://davidaguirre.tech/projects/vite-migration",
+    );
+  });
+
   it("keeps the twin on career topics", () => {
     expect(twinSystemPrompt).toMatch(/only talk about David's career/i);
     expect(twinSystemPrompt).toMatch(
