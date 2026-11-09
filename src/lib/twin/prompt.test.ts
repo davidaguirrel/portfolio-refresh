@@ -21,6 +21,12 @@ describe("twinSystemPrompt", () => {
     );
   });
 
+  it("knows the fun facts but only shares them when asked", () => {
+    expect(twinSystemPrompt).toContain("Golf handicap: 18");
+    expect(twinSystemPrompt).toContain("CrossFit");
+    expect(twinSystemPrompt).toMatch(/never volunteer them/i);
+  });
+
   it("keeps the twin on career topics", () => {
     expect(twinSystemPrompt).toMatch(/only talk about David's career/i);
     expect(twinSystemPrompt).toMatch(
