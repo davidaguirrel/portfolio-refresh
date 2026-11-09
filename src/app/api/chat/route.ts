@@ -86,6 +86,14 @@ export async function POST(request: Request) {
     stopWhen: isStepCount(3),
     maxOutputTokens: 600,
     providerOptions: { anthropic: { effort: "low" } },
+    // Shows in the Vercel logs whether the prompt cache is being used
+    onFinish: ({ totalUsage }) => {
+      const { cacheReadTokens = 0, cacheWriteTokens = 0 } =
+        totalUsage.inputTokenDetails;
+      console.log(
+        `Twin usage: ${totalUsage.inputTokens} input (${cacheReadTokens} cache read, ${cacheWriteTokens} cache write), ${totalUsage.outputTokens} output`,
+      );
+    },
   });
 
   return createUIMessageStreamResponse({
