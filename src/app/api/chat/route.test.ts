@@ -101,6 +101,10 @@ describe("POST /api/chat", () => {
     expect(call.maxOutputTokens).toBe(600);
     expect(call.prompt[0]).toMatchObject({ role: "system" });
     expect(JSON.stringify(call.prompt[0])).toContain("David Aguirre López");
+    // Marked for Anthropic's prompt cache
+    expect(call.prompt[0].providerOptions).toEqual({
+      anthropic: { cacheControl: { type: "ephemeral" } },
+    });
     expect(call.tools?.map((t) => t.name)).toEqual([
       "record_user_details",
       "record_unknown_question",
