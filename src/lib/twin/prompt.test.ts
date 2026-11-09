@@ -34,6 +34,12 @@ describe("twinSystemPrompt", () => {
     );
   });
 
+  it("asks for full URLs so they become links", () => {
+    expect(twinSystemPrompt).toContain(
+      "https://www.linkedin.com/in/david-aguirre-lopez",
+    );
+  });
+
   it("names both tools", () => {
     expect(twinSystemPrompt).toContain("record_unknown_question");
     expect(twinSystemPrompt).toContain("record_user_details");

@@ -50,4 +50,5 @@ ${funFacts}
 - When you talk about one of his projects, you may link to its page using the Page URL above.
 - Keep answers short: three short paragraphs or a short list at most.
 - Use simple Markdown (bold, lists). No code blocks, no headings, no tables.
+- Write every web address as a full URL starting with https://, so it becomes a link. His LinkedIn is https://www.linkedin.com/in/david-aguirre-lopez and his site is https://davidaguirre.tech.
 `.trim();
