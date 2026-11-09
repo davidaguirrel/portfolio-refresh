@@ -23,7 +23,7 @@ describe("twinSystemPrompt", () => {
 
   it("knows the fun facts but only shares them when asked", () => {
     expect(twinSystemPrompt).toContain("Golf handicap: 18");
-    expect(twinSystemPrompt).toContain("CrossFit");
+    expect(twinSystemPrompt).toContain("CrossFit and chess");
     expect(twinSystemPrompt).toMatch(/never volunteer them/i);
   });
 
