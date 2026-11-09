@@ -1,0 +1,58 @@
+---
+title: AI Digital Twin
+summary: A chat agent on this site that answers questions about my career, built with the Vercel AI SDK and Claude and grounded in my CV.
+year: 2026
+stack: [Next.js, TypeScript, Vercel AI SDK, Claude API, Upstash Redis]
+links:
+  code: https://github.com/davidaguirrel/portfolio-refresh
+  demo: https://davidaguirre.tech
+---
+
+The chat button in the corner of every page opens my AI digital twin. It
+answers recruiters' questions about my experience, skills and projects in the
+first person, and lets them leave their email so I can get back to them.
+
+## Where it started
+
+I learned the pattern in Ed Donner's Complete Agent and MCP course. My first
+version was a Python app with a Gradio chat window and an OpenAI model. It read
+my LinkedIn profile and a short summary, and it had two tools that send me a
+Pushover notification: one when someone shares their contact details, and one
+when it gets a question it can't answer.
+
+## Fitting it into this site
+
+Instead of hosting a separate Python app, I ported the agent to TypeScript and
+built it into this portfolio, so it shares the same repo, tests, deploys and
+domain.
+
+- A Next.js route handler on Vercel runs the agent with the Vercel AI SDK, which
+  streams the answer and handles the tool calls. The model is Claude Haiku.
+- The prompt is built from my LinkedIn profile and a summary, so
+  it stays on career topics and records any question it can't answer instead
+  of making something up.
+- The chat window is a React component that loads only when you open it, so
+  it adds nothing to the page load. On phones it opens full screen.
+
+## Keeping a public endpoint safe
+
+Anyone can call an AI endpoint on a public site, so most of the work went into
+protecting it, cheapest checks first:
+
+- Two kill switches: an environment variable and a flag in Upstash Redis.
+- A same-origin check, Vercel BotID and strict limits on message size.
+- Per-visitor and site-wide rate limits in Upstash Redis, plus a Vercel
+  Firewall rule.
+- A daily cap on notifications and a hard spending limit on the API key.
+
+## How it's checked
+
+- Vitest covers the prompt, the tools, the rate limits and the API route.
+- Playwright tests the chat window against a mocked stream, including keyboard
+  use and an axe accessibility scan in both themes.
+
+## What I learned
+
+Calling the model was the easy part. Most of the effort went into the prompt,
+abuse protection and cost control, which is what turns a demo into something
+I'm happy to leave running on a public site.
