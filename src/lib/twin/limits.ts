@@ -28,7 +28,7 @@ const siteWideDay = new Ratelimit({
 const notificationsDay = new Ratelimit({
   redis,
   prefix: "twin:notify",
-  limiter: Ratelimit.fixedWindow(3, "1 d"),
+  limiter: Ratelimit.fixedWindow(5, "1 d"),
 });
 
 export type LimitResult =
