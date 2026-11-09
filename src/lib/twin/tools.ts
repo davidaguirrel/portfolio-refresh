@@ -8,7 +8,11 @@ import { canNotify } from "./limits";
 export function createTwinTools(ip: string) {
   // At most a few notifications per visitor a day, so nobody can spam your phone
   async function push(message: string) {
-    if (await canNotify(ip)) await notifyDavid(message);
+    if (await canNotify(ip)) {
+      await notifyDavid(message);
+    } else {
+      console.warn("Notification cap reached, skipping:", message);
+    }
   }
 
   return {

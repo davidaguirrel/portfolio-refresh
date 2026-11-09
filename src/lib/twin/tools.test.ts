@@ -87,6 +87,7 @@ describe("twinTools", () => {
   });
   it("stops notifying once a visitor used up their daily allowance", async () => {
     vi.mocked(canNotify).mockResolvedValue(false);
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 
     await expect(
       twinTools.record_unknown_question.execute?.(
@@ -96,5 +97,11 @@ describe("twinTools", () => {
     ).resolves.toBe("OK");
     expect(canNotify).toHaveBeenCalledWith("203.0.113.7");
     expect(fetchMock).not.toHaveBeenCalled();
+    // The skipped push shows up in the Vercel logs
+    expect(warn).toHaveBeenCalledWith(
+      "Notification cap reached, skipping:",
+      expect.stringContaining("Anything"),
+    );
+    warn.mockRestore();
   });
 });
