@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 // The chat code (AI SDK and Markdown) only downloads after the first click,
@@ -40,13 +41,23 @@ export function ChatLauncher() {
         onClick={toggle}
         aria-expanded={open}
         aria-controls={loaded ? PANEL_ID : undefined}
-        className={`items-center gap-2 rounded-full bg-linear-to-r from-violet-600 to-cyan-700 px-5 py-3 font-semibold text-white shadow-lg shadow-violet-600/25 transition hover:brightness-110 motion-safe:hover:-translate-y-0.5 ${
+        className={`items-center gap-3 rounded-full bg-linear-to-r from-violet-600 to-cyan-700 p-1 font-semibold text-white shadow-lg shadow-violet-600/25 transition hover:brightness-110 motion-safe:hover:-translate-y-0.5 sm:pr-5 ${
           // On phones the open panel fills the screen and has its own close button
           open ? "hidden sm:flex" : "flex"
         }`}
       >
-        <span aria-hidden="true">{open ? "✕" : "✦"}</span>
-        {open ? "Close chat" : "Ask my AI twin"}
+        {/* Decorative: the button's name comes from the text next to it */}
+        <Image
+          src="/twin-avatar.jpg"
+          alt=""
+          width={48}
+          height={48}
+          className="size-12 rounded-full"
+        />
+        {/* Hidden on phones to keep the button small, but always read aloud */}
+        <span className="sr-only sm:not-sr-only">
+          {open ? "Close chat" : "Ask my AI twin"}
+        </span>
       </button>
     </div>
   );
