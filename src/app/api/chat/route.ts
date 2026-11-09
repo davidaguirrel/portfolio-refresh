@@ -74,7 +74,13 @@ export async function POST(request: Request) {
 
   const result = streamText({
     model: anthropic("claude-haiku-5-5"),
-    instructions: twinSystemPrompt,
+    // The prompt is the same for every request, so Anthropic caches it:
+    // later messages within 5 minutes read it at a tenth of the input price
+    instructions: {
+      role: "system",
+      content: twinSystemPrompt,
+      providerOptions: { anthropic: { cacheControl: { type: "ephemeral" } } },
+    },
     messages: await convertToModelMessages(parsed.data.messages),
     tools: createTwinTools(ip),
     stopWhen: isStepCount(3),
