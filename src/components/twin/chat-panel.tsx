@@ -3,6 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { chatErrorMessage } from "@/lib/twin/chat-errors";
 import { MAX_MESSAGES, MAX_USER_CHARS } from "@/lib/twin/message-limits";
 
@@ -144,6 +145,8 @@ export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
               className="max-w-[90%] space-y-2 text-sm leading-relaxed [&_a]:text-accent [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5"
             >
               <Markdown
+                // remark-gfm turns plain URLs and emails into links
+                remarkPlugins={[remarkGfm]}
                 allowedElements={ALLOWED_ELEMENTS}
                 unwrapDisallowed
                 components={{

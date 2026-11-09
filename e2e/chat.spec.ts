@@ -44,6 +44,28 @@ test("the chat answers a question", async ({ page }) => {
   await expect(chat.locator("strong")).toHaveText("frontend engineer");
 });
 
+test("plain URLs and emails in a reply become links", async ({ page }) => {
+  await mockChat(
+    page,
+    "See https://davidaguirre.tech/projects/digital-twin or write to contact@davidaguirre.tech",
+  );
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Ask my AI twin" }).click();
+  const chat = page.getByRole("region", { name: /AI twin/ });
+  await chat.getByLabel("Your message").fill("How did you build this?");
+  await chat.getByRole("button", { name: "Send" }).click();
+
+  await expect(
+    chat.getByRole("link", {
+      name: "https://davidaguirre.tech/projects/digital-twin",
+    }),
+  ).toHaveAttribute("href", "https://davidaguirre.tech/projects/digital-twin");
+  await expect(
+    chat.getByRole("link", { name: "contact@davidaguirre.tech" }),
+  ).toHaveAttribute("href", "mailto:contact@davidaguirre.tech");
+});
+
 test("an example question sends straight away", async ({ page }) => {
   await mockChat(page, "Ten years of web development.");
   await page.goto("/");
