@@ -9,7 +9,7 @@ import { MAX_MESSAGES, MAX_USER_CHARS } from "@/lib/twin/message-limits";
 const EXAMPLES = [
   "Tell me about your background and experience.",
   "What are you looking for in your next role?",
-  "What are your strongest technical skills?",
+  "How did you build this chat?",
   "How can I get in touch with you?",
 ];
 
