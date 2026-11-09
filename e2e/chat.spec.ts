@@ -47,7 +47,7 @@ test("the chat answers a question", async ({ page }) => {
 test("plain URLs and emails in a reply become links", async ({ page }) => {
   await mockChat(
     page,
-    "See https://davidaguirre.tech/projects/digital-twin or write to contact@davidaguirre.tech",
+    "See https://davidaguirre.tech/projects/digital-twin or linkedin.com/in/david-aguirre-lopez, or write to contact@davidaguirre.tech",
   );
   await page.goto("/");
 
@@ -61,6 +61,9 @@ test("plain URLs and emails in a reply become links", async ({ page }) => {
       name: "https://davidaguirre.tech/projects/digital-twin",
     }),
   ).toHaveAttribute("href", "https://davidaguirre.tech/projects/digital-twin");
+  await expect(
+    chat.getByRole("link", { name: "linkedin.com/in/david-aguirre-lopez" }),
+  ).toHaveAttribute("href", "https://linkedin.com/in/david-aguirre-lopez");
   await expect(
     chat.getByRole("link", { name: "contact@davidaguirre.tech" }),
   ).toHaveAttribute("href", "mailto:contact@davidaguirre.tech");
