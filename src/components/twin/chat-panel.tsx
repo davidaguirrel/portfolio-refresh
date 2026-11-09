@@ -4,6 +4,7 @@ import { useChat } from "@ai-sdk/react";
 import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { addMissingProtocols } from "@/lib/twin/bare-links";
 import { chatErrorMessage } from "@/lib/twin/chat-errors";
 import { MAX_MESSAGES, MAX_USER_CHARS } from "@/lib/twin/message-limits";
 
@@ -157,7 +158,7 @@ export function ChatPanel({ id, open, onClose }: ChatPanelProps) {
                   ),
                 }}
               >
-                {text}
+                {addMissingProtocols(text)}
               </Markdown>
             </div>
           );
